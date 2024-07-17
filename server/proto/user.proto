@@ -4,6 +4,7 @@ service UserService{
     rpc addUser(User) returns (User){}
     rpc getUsers(Empty) returns (UserList){}
     rpc UpdateName(User) returns (User){}
+    rpc Remove(RequestMail) returns (Empty){}
 }
 
 message Empty{}
@@ -16,4 +17,8 @@ message User{
 
 message UserList{
     repeated User user=1;
+}
+
+message RequestMail{
+    string email=1;
 }

@@ -45,6 +45,20 @@ function main() {
         });
       }
     },
+    Remove: (call, callback) => {
+      let existring = Users.findIndex(
+        (user) => user.email === call.request.email
+      );
+      if (existring != -1) {
+        Users.splice(existring, 1);
+        callback(null,{});
+      } else {
+        callback({
+          code: grpc.status.NOT_FOUND,
+          details: "not found",
+        });
+      }
+    },
   });
 
   server.bindAsync(

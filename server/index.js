@@ -36,7 +36,7 @@ app.post("/add", (req, res) => {
   });
 });
 
-app.put("/update", (req, res) => {
+app.patch("/update", (req, res) => {
   console.log(req.body);
   const updateUser = {
     name: req.body.name,
@@ -53,6 +53,17 @@ app.put("/update", (req, res) => {
         .status(500)
         .json({ success: false, err: "something wrong", error: err });
     }
+  });
+});
+
+//*delete
+app.put("/remove", (req, res) => {
+  let email = req.body.email;
+  client.Remove({ email: email }, (err, _) => {
+    if (err) {
+      res.status(500).json({ success: false, error: err });
+    }
+    res.json({ success: true, message: "Successfully removed" });
   });
 });
 
